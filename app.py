@@ -14,10 +14,8 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 class Notes(db.Model):
-    __tablename__ = 'notes'
-
     id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(50), unique=True, nullable=False)
+    content = db.Column(db.String(50))
 
     def __init__(self, content):
         self.content = content
@@ -26,14 +24,14 @@ class Notes(db.Model):
 
 @app.route('/')
 def index():
-    #show all notes
-    # notes = Notes.query.all()
+    all_notes = Notes.query.all()
+    print(all_notes)
     return render_template('base.html')
 
-@app.route('/test')
-def message():
-    return "Hello"
 
 if __name__ == "__main__":
-    # db.create_all()
+    db.create_all()
+    new_note = Notes(content="first test")
+    db.session.add(new_note)
+    db.session.commit()
     app.run(debug=True)  
