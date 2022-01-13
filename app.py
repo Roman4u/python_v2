@@ -42,9 +42,10 @@ def update(note_id):
     db.session.commit()
     return redirect(url_for("index"))
 
-@app.route("/delete/id", methods=["DELETE"])
+@app.route("/delete/id", methods=["POST"])
 def delete_note(note_id):
-    note = Notes.query.get(id=note_id).first()
+    print("I'm here")
+    note = Notes.query.filter_by(id=note_id).first()
     db.session.delete(note)
     db.session.commit()
     return redirect(url_for("index"))
