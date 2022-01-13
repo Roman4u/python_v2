@@ -7,17 +7,30 @@
     <title>NOTES APP</title>
   </head>
   <body>
+    
     <h1>NOTES APP</h1>
-    <form>
+
+    <form action="/add" method="post">
       <div>
         <label for="title">My Notes</label>
         <input type="text" name="title" placeholder="your note..." />
+        <br>
         <button type="submit">Add</button>
       </div>
     </form>
 
     {% for note in all_notes %}
         <p> {{ note.id }} | {{ note.content }} </p>
+
+        {% if note.complete == false %}
+          <span>Not complete</span>
+        {% else %}
+          <span>Completed</span>
+        {% endif %}
+
+        <a href="">Update</a>
+        <a href="">Delete</a>
+
     {% endfor %}
 
   </body>
