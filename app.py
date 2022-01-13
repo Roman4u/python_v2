@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -18,11 +18,21 @@ class Notes(db.Model):
     content = db.Column(db.String(50))
     complete = db.Column(db.Boolean)
 
-@app.route('/')
+@app.route("/")
 def index():
     all_notes = Notes.query.all()
     print(all_notes)
     return render_template('base.html', all_notes=all_notes)
+
+@app.route("/add", methods=["POST"])
+def add():
+    title = request.form.get("title")
+    new_note = Notes(content=title, complete=False)
+    db.session.add(new_note)
+    db.session.commit()
+    # after the the item is posted to the DB, 
+    # redirect user to the html page in the index function above
+    return redirect(url_for("index"))
 
 
 if __name__ == "__main__":
