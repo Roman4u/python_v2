@@ -16,22 +16,20 @@ migrate = Migrate(app, db)
 class Notes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(50))
-
-    def __init__(self, content):
-        self.content = content
-
-
+    complete = db.Column(db.Boolean)
 
 @app.route('/')
 def index():
     all_notes = Notes.query.all()
     print(all_notes)
-    return render_template('base.html')
+    return render_template('base.html', all_notes=all_notes)
 
 
 if __name__ == "__main__":
     db.create_all()
-    new_note = Notes(content="first test")
-    db.session.add(new_note)
-    db.session.commit()
+
+    # new_note = Notes(content="first test", complete=False)
+    # db.session.add(new_note)
+    # db.session.commit()
+
     app.run(debug=True)  
