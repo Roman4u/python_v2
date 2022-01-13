@@ -5,33 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NOTES APP</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
   </head>
   <body>
-    
-    <h1>NOTES APP</h1>
+    <div style="margin-top: 50px" class="ui container">
+      <h1 class="ui center aligned header">NOTES APP</h1>
 
-    <form action="/add" method="post">
+      <form class="ui form" action="/add" method="post">
+        <div class="field">
+          <label for="title">My Notes</label>
+          <input type="text" name="title" placeholder="your note..." /><br />
+        </div>
+        <button type="submit" class="ui blue button">Add</button>
+      </form>
+
+      {% for note in all_notes %}
       <div>
-        <label for="title">My Notes</label>
-        <input type="text" name="title" placeholder="your note..." />
-        <br>
-        <button type="submit">Add</button>
-      </div>
-    </form>
-
-    {% for note in all_notes %}
-        <p> {{ note.id }} | {{ note.content }} </p>
+        <p class="ui big header">{{ note.id }} | {{ note.content }}</p>
 
         {% if note.complete == false %}
-          <span>Not complete</span>
+        <span class="ui green label">Not complete</span>
         {% else %}
-          <span>Completed</span>
+        <span>Completed</span>
         {% endif %}
 
-        <a href="">Update</a>
-        <a href="">Delete</a>
+        <form action="/delete/{{ note.id }}" method="delete">
+          <!-- <input class="btn" type="submit" name="delete" value="Delete" /> -->
+          <button type="submit" class="ui blue button">Delete</button>
+        </form>
 
-    {% endfor %}
-
+        <!-- <a href="/update/{{ note.id }}">Update</a>
+          <a href="/delete/{{ note.id }}" >Delete</a> -->
+      </div>
+      {% endfor %}
+    </div>
   </body>
 </html>

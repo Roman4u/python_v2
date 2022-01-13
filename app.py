@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -33,6 +34,23 @@ def add():
     # after the the item is posted to the DB, 
     # redirect user to the html page in the index function above
     return redirect(url_for("index"))
+
+@app.route("/update/<int:id>")
+def update(note_id):
+    note = Notes.query.filter_by(id=note_id).first()
+    note.complete = not note.compete
+    db.session.commit()
+    return redirect(url_for("index"))
+
+@app.route("/delete/id", methods=["DELETE"])
+def delete_note(note_id):
+    note = Notes.query.get(id=note_id).first()
+    db.session.delete(note)
+    db.session.commit()
+    return redirect(url_for("index"))
+
+
+
 
 
 if __name__ == "__main__":
