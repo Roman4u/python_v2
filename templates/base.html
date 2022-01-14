@@ -26,7 +26,7 @@
 
       {% for note in all_notes %}
       <div>
-        <p class="ui big header">{{ note.id }} | {{ note.content }}</p>
+        <p class="ui big header">{{ note.content }}</p>
 
         {% if note.complete == false %}
         <span class="ui green label">Not complete</span>
@@ -34,7 +34,7 @@
         <span>Completed</span>
         {% endif %}
 
-        <form action="/delete/{{ note.id }}">
+        <form action="/remove/{{ note.id }}" method="POST">
           <!-- <input class="btn" type="submit" name="delete" value="Delete" /> -->
           <button type="submit" class="ui blue button">Delete</button>
         </form>
