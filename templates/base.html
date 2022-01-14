@@ -12,6 +12,7 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
   </head>
+
   <body>
     <div style="margin-top: 50px" class="ui container">
       <h1 class="ui center aligned header">NOTES APP</h1>
@@ -25,7 +26,7 @@
       </form>
 
       {% for note in all_notes %}
-      <div>
+      <div class="ui segment">
         <p class="ui big header">{{ note.content }}</p>
 
         {% if note.complete == false %}
