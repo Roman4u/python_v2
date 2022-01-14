@@ -35,22 +35,20 @@ def add():
     # redirect user to the html page in the index function above
     return redirect(url_for("index"))
 
-@app.route("/update/<int:id>")
-def update(note_id):
+@app.route("/update/<int:note_id>", methods=["POST"])
+def update_note(note_id):
     note = Notes.query.filter_by(id=note_id).first()
     note.complete = not note.compete
     db.session.commit()
     return redirect(url_for("index"))
 
-@app.route("/delete/id", methods=["POST"])
+@app.route("/remove/<int:note_id>", methods=["POST"])
 def delete_note(note_id):
-    print("I'm here")
+    print("I'm here") 
     note = Notes.query.filter_by(id=note_id).first()
     db.session.delete(note)
     db.session.commit()
     return redirect(url_for("index"))
-
-
 
 
 
