@@ -38,7 +38,7 @@ def add():
 @app.route("/update/<int:note_id>", methods=["POST"])
 def update_note(note_id):
     note = Notes.query.filter_by(id=note_id).first()
-    note.complete = not note.compete
+    note.complete = not note.complete
     db.session.commit()
     return redirect(url_for("index"))
 

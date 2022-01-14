@@ -30,9 +30,14 @@
         <p class="ui big header">{{ note.content }}</p>
 
         {% if note.complete == false %}
-        <span class="ui green label">Not complete</span>
+        <!-- <span class="ui green label">Not complete</span> -->
+        <form action="/update/{{ note.id }}" method="POST">
+          <span class="ui red label">Not complete</span>
+          <!-- <input class="btn" type="submit" name="delete" value="Delete" /> -->
+          <button type="submit" class="ui green button">Update</button>
+        </form>
         {% else %}
-        <span>Completed</span>
+        <span class="ui green label">Completed</span>
         {% endif %}
 
         <form action="/remove/{{ note.id }}" method="POST">
