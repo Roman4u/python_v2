@@ -31,8 +31,6 @@ def add():
     new_note = Notes(content=title, complete=False)
     db.session.add(new_note)
     db.session.commit()
-    # after the the item is posted to the DB, 
-    # redirect user to the html page in the index function above
     return redirect(url_for("index"))
 
 @app.route("/update/<int:note_id>", methods=["POST"])
@@ -55,8 +53,5 @@ def delete_note(note_id):
 if __name__ == "__main__":
     db.create_all()
 
-    # new_note = Notes(content="first test", complete=False)
-    # db.session.add(new_note)
-    # db.session.commit()
 
     app.run(debug=True)  
