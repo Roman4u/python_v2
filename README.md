@@ -1,5 +1,9 @@
 # Project Name
 <p align="center">Notes App</p>
+<p align="center">
+<a href=""><img src="./python.png" height="400px" margin="auto" >
+</a>
+</p>
 
 # Description
 <p>
@@ -14,3 +18,4 @@ Made with:
 - Postgres
 # Getting Started
 # Deployment
+- Heroku
