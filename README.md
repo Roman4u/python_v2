@@ -11,6 +11,7 @@ The Notes App is a fullstack web app that incorporates CRUD principles built in 
 
 # Tech Stack
 Made with:
+- Jinja
 - Python
 - Flask
 - SQLAlchemy
